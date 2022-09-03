@@ -1,0 +1,63 @@
+.formBody {
+    margin-top: 5vh;
+    margin-bottom: 3vh;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.inputGroup {
+    flex:1;  
+    display: flex;
+    flex-direction: column;
+    margin-top: 2vh;
+    margin-bottom: 3vh;
+}
+
+label {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+input[type="text"], input[type="date"], input[type="email"] {
+    font-size: 16px;
+    height: 4vh;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 1px solid #666;
+    background: white;
+    outline: none;
+    border-radius: 10px;
+}
+
+.borderRed {
+    border: 1px solid red!important;
+}
+
+.borderGreen {
+    border: 1px solid green!important;
+}
+
+.checkboxGroup {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1vh;
+}
+
+.checkboxLabel {
+    font-weight: 400!important;
+}
+
+.submitButton {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 3vh;
+}
+
+.error {
+    margin: 0;
+    margin-bottom: -15px;
+    color: red;
+    font-size: 12px;
+}

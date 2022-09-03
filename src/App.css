@@ -1,0 +1,15 @@
+.formPage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.form {
+  width: 30vw;
+  min-height: 50vh;
+  margin-left: auto;
+  margin-right: auto;
+  background: rgba(255,255,255, 0.85);
+  border-radius: .8vw;
+}
