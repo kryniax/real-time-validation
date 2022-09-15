@@ -29,7 +29,9 @@ const ValidationForm = () => {
         reset, 
         trigger, 
         formState: {errors, isValid} 
-    } = useForm<FormValues>({ mode: 'onChange' });
+    } = useForm<FormValues>({ 
+        mode: 'onChange' 
+    });
 
     const onSubmit: SubmitHandler<FormValues> = (event) => {
         alert(JSON.stringify(event));
