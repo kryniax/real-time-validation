@@ -10,9 +10,7 @@ const Email = (props: Props) => {
         <input 
             type="email"
             data-testid="email"
-            {...props.register("email", {
-                required: "Email is required",
-            })}
+            {...props.register("email")}
             onKeyUp={(e) => {
                 const emailValue = (e.target as HTMLInputElement).value;
                 props.trigger('email');
