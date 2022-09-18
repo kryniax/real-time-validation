@@ -6,7 +6,7 @@ describe('ValidationForm component', () => {
     test('Render email input', () => {
         render(<ValidationForm />);
      
-        const inputEmail = screen.getByTestId("email");
+        const inputEmail: HTMLElement = screen.getByTestId("email");
         expect(inputEmail).toBeInTheDocument();
         expect(inputEmail).toHaveAttribute("type", "email");
       });
@@ -14,7 +14,7 @@ describe('ValidationForm component', () => {
       test('Pass valid email', () => {
         render(<ValidationForm />);
      
-        const inputEmail = screen.getByTestId("email");
+        const inputEmail: HTMLElement = screen.getByTestId("email");
         userEvent.type(inputEmail, "ee@op.pl");
      
         expect(screen.getByTestId("email")).toHaveValue("ee@op.pl");
@@ -23,7 +23,7 @@ describe('ValidationForm component', () => {
       test('Pass invalid email', () => {
         render(<ValidationForm />);
      
-        const inputEmail = screen.getByTestId("email");
+        const inputEmail: HTMLElement = screen.getByTestId("email");
         userEvent.type(inputEmail, "ee@op");
      
         expect(screen.getByTestId("email")).toHaveValue("ee@op");
