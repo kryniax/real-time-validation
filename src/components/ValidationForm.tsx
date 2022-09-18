@@ -1,4 +1,5 @@
-import React, { useCallback, useState } from "react";
+import { error } from "console";
+import React, { useCallback, useState, useEffect } from "react";
 import { SubmitHandler, useForm } from 'react-hook-form';
 import BirthDate from "../inputs/BirthDate";
 import Email from "../inputs/Email";
@@ -16,11 +17,19 @@ type FormValues = {
     checkbox: string;
 }
 
+type EmailPromise = {
+    status: number;
+    status_message: string;
+    validation_status: boolean;
+    email: string;
+}
+
 const ValidationForm = () => {
 
     const [isName, setIsName] = useState('');
     const [isSurname, setIsSurname] = useState('');
     const [isEmail, setIsEmail] = useState('');
+    const [isEmailValue, setIsEmailValue] = useState('');
     const [emailState, setEmailState] = useState(true);
 
     const{ 
@@ -47,17 +56,18 @@ const ValidationForm = () => {
             method: 'GET',
             redirect: 'follow',
         }
-
-        const url: string = `/api/email-validator.php?email=${emailValue}`;
+        
+        const email: string = encodeURIComponent(emailValue);
+        const url: string = `/api/email-validator.php?email=${email}`;
 
         try{
             const response: Response = await fetch(url, requestOption);
             if(!response.ok) {
-                throw new Error('error');
+                throw new Error('Error');
             }
             const data = await response.json();
-            setEmailState(data.validation_status);    
 
+            return data;
         } catch(error: any) {
             console.error(error);
         }
@@ -80,13 +90,26 @@ const ValidationForm = () => {
     }
 
     const emailHandler = (value: string) => {
-        if(emailState === false || value.length < 3) {
+        setIsEmailValue(value); 
+        if(value !== ''){
+            const promise: Promise<EmailPromise> = fetchEmailHandler(value);
+            promise.then((data) => {
+                setEmailState(data.validation_status); 
+            });
+        }
+    }
+
+    useEffect(() => {
+        if(emailState === true && isEmailValue === ''){
+            setIsEmail(classes.input);
+
+        }else if(emailState === false) {
             setIsEmail(classes.borderRed);
+            
         }else{
             setIsEmail(classes.borderGreen);
         }
-        fetchEmailHandler(value);
-    }
+    }, [emailHandler]);
 
 return(
     <React.Fragment>
@@ -136,11 +159,8 @@ return(
                     isEmail={isEmail}
                 />
 
-                <p className={classes.error}>
+                <p className={classes.error} data-testid="errorMessage">
                     {emailState ? '' : 'Email not valid'}
-                    {errors.email && (
-                    <p className={classes.error}>{errors.email.message}</p>
-                )}
                 </p>
             </div>
             <label>Gender</label>

@@ -9,6 +9,7 @@ const Email = (props: Props) => {
     return(
         <input 
             type="email"
+            data-testid="email"
             {...props.register("email", {
                 required: "Email is required",
             })}
